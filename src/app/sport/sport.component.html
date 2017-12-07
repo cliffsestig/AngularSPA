@@ -1,0 +1,15 @@
+<div class="col-md-5">
+<a *ngFor="let sport of sports"
+  style="cursor: pointer;"
+  [routerLink]="[sport._id]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ sport.name }}</h4>
+    <p class="list-group-item-text">{{ sport.description }}</p>
+  </div>
+</a>
+</div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
+  </div>
