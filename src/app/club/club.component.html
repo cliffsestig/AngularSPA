@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewClub()">New Club</button>
+  </div>
+</div>
+<hr>
+<div class="col-md-7"  *ngFor="let club of sport.clubs">
+<a
+  style="cursor: pointer;"
+  [routerLink]="['club', club._id]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ club.name }}</h4>
+    <p class="list-group-item-text">{{ club.description }}</p>
+  </div>
+</a>
+
+<button class="btn btn-success pull-right" [routerLink]="[club._id, 'edit']">Edit</button>
+
+<button class="btn btn-danger pull-right" (click)="onDeleteClub(sport._id, club._id)">Delete</button>
+
+</div>
+  <div class="col-md-5">
+    <router-outlet></router-outlet>
+  </div>

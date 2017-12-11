@@ -1,15 +1,30 @@
-<div class="col-md-5">
-<a *ngFor="let sport of sports"
-  style="cursor: pointer;"
-  [routerLink]="[sport._id]"
-  routerLinkActive="active"
-  class="list-group-item clearfix">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ sport.name }}</h4>
-    <p class="list-group-item-text">{{ sport.description }}</p>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewSport()">New Sport</button>
   </div>
-</a>
 </div>
-  <div class="col-md-7">
+<hr>
+<div *ngFor="let sport of sports; let i = index" col-md-12>
+  <div class="col-md-10" >
+
+  <a 
+    style="cursor: pointer;"
+    [routerLink]="[sport._id]"
+    routerLinkActive="active"
+    class="list-group-item clearfix">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading">{{ sport.name }}</h4>
+      <p class="list-group-item-text">{{ sport.description }}</p>
+    </div>
+  </a>
+  </div>
+
+
+  <button class="btn btn-success pull-right col-md-1" [routerLink]="[sport._id, 'edit']">Edit</button>
+
+  <button class="btn btn-danger pull-right col-md-1" (click)="onDeleteSport(sport._id, i)">Delete</button>
+</div>
+
+  <div class="col-md-5">
     <router-outlet></router-outlet>
   </div>
