@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { SportService } from '../../../services/sport.service';
+import { Sport } from '../../../shared/sport.model';
 
 @Component({
   selector: 'app-sport-edit',
@@ -33,17 +34,25 @@ export class SportEditComponent implements OnInit {
       );
   }
 
+  @Output()
+  onAdd: EventEmitter<Sport> = new EventEmitter<Sport>();
+
   onSubmit() {
     if (this.editMode) {
+      console.log('testv2');
       this.sportService.updateSport(this.id, this.sportForm.value);
     } else {
+      console.log('test');
+      this.onAdd.next(this.sportForm.value);
       this.sportService.addSport(this.sportForm.value);
     }
     this.onCancel();
   }
 
   onCancel() {
-    this.router.navigate(['../../'], {relativeTo: this.route});
+
+    this.sportForm.reset();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {

@@ -1,11 +1,9 @@
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-success" (click)="onNewSport()">New Sport</button>
+
+  <div class="col-md-4 pull-right">
+    <app-sport-edit (onAdd)="onAddSport($event)"></app-sport-edit>
   </div>
-</div>
-<hr>
-<div *ngFor="let sport of sports; let i = index" col-md-12>
-  <div class="col-md-10" >
+<div *ngFor="let sport of sports; let i = index" class="col-md-7">
+  <div class="col-md-6">
 
   <a 
     style="cursor: pointer;"
@@ -20,11 +18,10 @@
   </div>
 
 
-  <button class="btn btn-success pull-right col-md-1" [routerLink]="[sport._id, 'edit']">Edit</button>
+  <button class="btn btn-success col-md-2" [routerLink]="[sport._id, 'edit']">Edit</button>
 
-  <button class="btn btn-danger pull-right col-md-1" (click)="onDeleteSport(sport._id, i)">Delete</button>
+  <button class="btn btn-danger  col-md-2" (click)="onDeleteSport(sport._id, i)">Delete</button>
+
 </div>
 
-  <div class="col-md-5">
-    <router-outlet></router-outlet>
-  </div>
+

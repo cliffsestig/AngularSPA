@@ -9,11 +9,11 @@ import { SportService } from '../../services/sport.service';
 @Component({
   selector: 'app-sport',
   templateUrl: './sport.component.html',
-  styleUrls: ['./sport.component.css'],
+  styleUrls: ['./sport.component.css'],  
   providers: [SportService]
 })
 export class SportComponent implements OnInit, OnDestroy {
-  
+
 	sports: Sport[];
 
   subscription: Subscription;
@@ -39,6 +39,11 @@ export class SportComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onAddSport(sport){
+    this.sports.push(sport);
+    this.sportService.changeSport(this.sports);
   }
 
   onNewSport() {
