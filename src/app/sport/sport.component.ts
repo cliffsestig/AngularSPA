@@ -13,8 +13,7 @@ import { SportService } from '../../services/sport.service';
   providers: [SportService]
 })
 export class SportComponent implements OnInit, OnDestroy {
-
-  @ViewChild(SportEditComponent) child;
+  
 	sports: Sport[];
 
   subscription: Subscription;
