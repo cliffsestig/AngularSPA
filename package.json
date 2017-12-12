@@ -4,16 +4,19 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "http-server dist/",
-    "build": "tslint \"src/**/*.ts\"",
+    "start": "ng serve",
+    "build": "ng build --prod --env=prod ",
+    "postinstall": "ng build --prod --env=prod ",
+    "build:prod": "ng build --prod --env=prod && node server.js",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "protractor",
-    "preinstall":   "npm install -g http-server",
-    "postinstall":  "ng build --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@angular/language-service": "^5.0.0",
+    "@angular/cli": "1.5.4",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
@@ -29,9 +32,6 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.4",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/language-service": "^5.0.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
