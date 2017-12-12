@@ -53,7 +53,7 @@ export class ClubComponent implements OnInit, OnDestroy {
   }
 
   onAddClub(sport){
-    this.sport.clubs.push(sport);
+    //this.sport.clubs.push(sport);
     this.sportService.changeSport(this.sport);
   }
 
@@ -69,7 +69,7 @@ export class ClubComponent implements OnInit, OnDestroy {
 
   onDeleteClub(id: number, cid: number, i) {
     
-    this.sport.clubs.splice(i,1);
+    //this.sport.clubs.splice(i,1);
     this.sportService.changeSport(this.sport);
     this.sportService.deleteClub(id, cid);
     this.router.navigate(['/sport']);
