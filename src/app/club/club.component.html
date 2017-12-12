@@ -1,10 +1,9 @@
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-success" (click)="onNewClub()">New Club</button>
+
+  <div class="col-md-4 pull-right">
+    <app-club-edit (onAdd)="onAddClub($event)" (onUpdate)="onUpdateClub($event)" [editMode]='edit' [id]='id' [cid]='cidx'></app-club-edit>
   </div>
-</div>
-<hr>
-<div class="col-md-7"  *ngFor="let club of sport.clubs">
+
+<div *ngFor="let club of sport.clubs; let i = index" class="col-md-7">
 <a
   style="cursor: pointer;"
   [routerLink]="['club', club._id]"
@@ -15,12 +14,7 @@
     <p class="list-group-item-text">{{ club.description }}</p>
   </div>
 </a>
+  <button class="btn btn-success col-md-2" (click)="onEditClub(sport._id, sport.clubs[i]._id)"[routerLink]="[club._id, 'edit']">Edit</button>
 
-<button class="btn btn-success pull-right" [routerLink]="[club._id, 'edit']">Edit</button>
-
-<button class="btn btn-danger pull-right" (click)="onDeleteClub(sport._id, club._id)">Delete</button>
-
+  <button class="btn btn-danger  col-md-2" (click)="onDeleteClub(sport._id, sport.clubs[i]._id, i)">Delete</button>
 </div>
-  <div class="col-md-5">
-    <router-outlet></router-outlet>
-  </div>

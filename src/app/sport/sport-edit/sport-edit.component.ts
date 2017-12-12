@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
@@ -14,8 +14,8 @@ import { Sport } from '../../../shared/sport.model';
 })
 export class SportEditComponent implements OnInit {
 
-  id: number;
-  editMode = false;
+  @Input() id: number;
+  @Input() editMode: boolean;
   sportForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
@@ -24,25 +24,23 @@ export class SportEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
-          this.editMode = params['id'] != null;
-          this.initForm();
-        }
-      );
+     this.initForm();
   }
 
   @Output()
   onAdd: EventEmitter<Sport> = new EventEmitter<Sport>();
 
+  @Output()
+  onUpdate: EventEmitter<Sport> = new EventEmitter<Sport>();
+
+
   onSubmit() {
     if (this.editMode) {
-      console.log('testv2');
+      this.sportForm.value._id = this.id;
+      this.onUpdate.next(this.sportForm.value);
       this.sportService.updateSport(this.id, this.sportForm.value);
     } else {
-      console.log('test');
+      console.log(this.editMode);
       this.onAdd.next(this.sportForm.value);
       this.sportService.addSport(this.sportForm.value);
     }
@@ -50,7 +48,8 @@ export class SportEditComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.editMode = false;
+    this.id = null;
     this.sportForm.reset();
     this.router.navigate(['../'], {relativeTo: this.route});
   }

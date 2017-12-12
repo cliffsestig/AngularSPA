@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { SportService } from '../../../services/sport.service';
+
+import { Sport } from '../../../shared/sport.model';
 
 @Component({
   selector: 'app-club-edit',
@@ -13,9 +15,9 @@ import { SportService } from '../../../services/sport.service';
 })
 export class ClubEditComponent implements OnInit {
 
-  id: number;
-  cid: number;
-  editMode = false;
+  @Input() id: number;
+  @Input() cid: number;
+  @Input() editMode = false;
   clubForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
@@ -24,36 +26,33 @@ export class ClubEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.parent.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
-        }
-      );
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.cid = params['cid'];
-          this.editMode = params['cid'] != null;
-          this.initForm();
-        }
-      );
+    this.initForm();
   }
+
+  @Output()
+  onAdd: EventEmitter<Sport> = new EventEmitter<Sport>();
+
+  @Output()
+  onUpdate: EventEmitter<Sport> = new EventEmitter<Sport>();
 
   onSubmit() {
     if (this.editMode) {
+      console.log('test');
+      this.clubForm.value._id = this.id;
+      this.onUpdate.next(this.clubForm.value);
       this.sportService.updateClub(this.id, this.cid, this.clubForm.value);
-      this.onCancel();
     } else {
-      console.log(this.id, this.cid);
+      this.onAdd.next(this.clubForm.value);
       this.sportService.addClub(this.clubForm.value, this.id);
-
-    this.router.navigate(['../'], {relativeTo: this.route});
     }
+    this.onCancel();
   }
 
   onCancel() {
-    this.router.navigate(['../../'], {relativeTo: this.route});
+    this.editMode = false;
+    this.id = null;
+    this.clubForm.reset();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {

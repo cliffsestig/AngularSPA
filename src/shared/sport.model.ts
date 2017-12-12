@@ -1,6 +1,7 @@
 import { Club } from './club.model';
 
 export class Sport {
+  public _id: number;
   public name: string;
   public description: string;
   public clubs: Club[];

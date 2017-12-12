@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Sport } from '../../shared/sport.model';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,11 +10,13 @@ import { SportService } from '../../services/sport.service';
   selector: 'app-sport',
   templateUrl: './sport.component.html',
   styleUrls: ['./sport.component.css'],  
-  providers: [SportService]
+  providers: [SportService],
 })
 export class SportComponent implements OnInit, OnDestroy {
 
 	sports: Sport[];
+  id: number;
+  edit:boolean;
 
   subscription: Subscription;
 
@@ -41,9 +43,20 @@ export class SportComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  onEditSport(id){
+    this.id = id;
+    this.edit = true;
+  }
+
   onAddSport(sport){
     this.sports.push(sport);
     this.sportService.changeSport(this.sports);
+  }
+
+  onUpdateSport(sport){
+      const index = this.sports.findIndex(x => x._id === sport._id);
+      this.sports[index] = sport;
+      this.sportService.changeSport(this.sports);
   }
 
   onNewSport() {
