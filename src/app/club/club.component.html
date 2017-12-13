@@ -11,7 +11,10 @@
   class="list-group-item clearfix">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ club.name }}</h4>
-    <p class="list-group-item-text">{{ club.description }}</p>
+      <p class="list-group-item-text">{{ club.city }}</p>
+      <p class="list-group-item-text">{{ club.address }}</p>
+      <p class="list-group-item-text">{{ club.zipcode }}</p>
+      <p class="list-group-item-text">{{ club.description }}</p>
   </div>
 </a>
   <button class="btn btn-success col-md-2" (click)="onEditClub(sport._id, sport.clubs[i]._id)"[routerLink]="[club._id, 'edit']">Edit</button>

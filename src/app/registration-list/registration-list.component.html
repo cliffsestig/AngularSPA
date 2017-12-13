@@ -1,0 +1,18 @@
+
+
+<div *ngFor="let registration of registrations; let i = index" class="col-md-7">
+  <div class="col-md-6">
+  <a 
+    class="list-group-item clearfix">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading">
+{{registration._fields[0].properties.firstname}}</h4>
+      <p class="list-group-item-text">
+{{registration._fields[0].properties.lastname}}</p>
+      <p class="list-group-item-text">
+{{registration._fields[0].properties.age}}</p>
+      <p class="list-group-item-text">
+{{registration._fields[0].properties.gender}}</p>
+    </div>
+  </a>
+  </div>

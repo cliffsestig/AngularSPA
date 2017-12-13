@@ -1,0 +1,20 @@
+
+
+<div *ngFor="let club of clubs; let i = index" class="col-md-7">
+  <div class="col-md-6">
+  <a 
+    class="list-group-item clearfix">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading">
+{{club._fields[0].properties.name}}</h4>
+      <p class="list-group-item-text">
+{{club._fields[0].properties.city}}</p>
+      <p class="list-group-item-text">
+{{club._fields[0].properties.address}}</p>
+      <p class="list-group-item-text">
+{{club._fields[0].properties.zipcode}}</p>
+      <p class="list-group-item-text">
+{{club._fields[0].properties.description}}</p>
+    </div>
+  </a>
+  </div>

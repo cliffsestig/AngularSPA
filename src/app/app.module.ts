@@ -12,6 +12,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SportEditComponent } from './sport/sport-edit/sport-edit.component';
 import { ClubEditComponent } from './club/club-edit/club-edit.component';
 import { RegistrationEditComponent } from './registration/registration-edit/registration-edit.component';
+import { ClubListComponent } from './club-list/club-list.component';
+import { RegistrationListComponent } from './registration-list/registration-list.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { RegistrationEditComponent } from './registration/registration-edit/regi
     RegistrationComponent,
     SportEditComponent,
     ClubEditComponent,
-    RegistrationEditComponent
+    RegistrationEditComponent,
+    ClubListComponent,
+    RegistrationListComponent
   ],
   imports: [
     BrowserModule,

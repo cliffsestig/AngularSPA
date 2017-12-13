@@ -37,7 +37,6 @@ export class ClubEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      console.log('test');
       this.clubForm.value._id = this.cid;
       this.onUpdate.next(this.clubForm.value);
       this.sportService.updateClub(this.id, this.cid, this.clubForm.value);
@@ -50,25 +49,33 @@ export class ClubEditComponent implements OnInit {
 
   onCancel() {
     this.editMode = false;
-    this.id = null;
     this.clubForm.reset();
     this.router.navigate(['./'], {relativeTo: this.route});
   }
 
   private initForm() {
     let clubName = '';
+    let clubCity = '';
+    let clubAddress = '';
+    let clubZipcode = '';
     let clubDescription = '';
 
     if (this.editMode) {
       const club = this.sportService.getClub(this.id, this.cid).then(club => {
       clubName = club.name;
+      clubCity = club.city;
+      clubAddress = club.address;
+      clubZipcode = club.zipcode;
       clubDescription = club.description;
     });
     }
 
     this.clubForm = new FormGroup({
       'name': new FormControl(clubName, Validators.required),
-      'description': new FormControl(clubDescription, Validators.required)
+      'city': new FormControl(clubCity, Validators.required),
+      'address': new FormControl(clubAddress, Validators.required),
+      'zipcode': new FormControl(clubZipcode, Validators.required),
+      'description': new FormControl(clubDescription, Validators.required),
     });
   }
 }

@@ -1,10 +1,16 @@
 export class Registration {
   public _id: number;
-  public name: string;
+  public firstname: string;
+  public lastname: string;
+  public age: number;
+  public gender: string;
   public description: string;
 
-  constructor(name: string, desc: string) {
-    this.name = name;
+  constructor(firstname: string, lastname: string, age: number, gender: string, desc: string) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.age = age;
+    this.gender = gender;
     this.description = desc;
   }
 }

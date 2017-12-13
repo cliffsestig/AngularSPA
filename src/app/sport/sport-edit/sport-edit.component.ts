@@ -49,7 +49,6 @@ export class SportEditComponent implements OnInit {
 
   onCancel() {
     this.editMode = false;
-    this.id = null;
     this.sportForm.reset();
     this.router.navigate(['../'], {relativeTo: this.route});
   }

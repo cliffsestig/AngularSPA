@@ -52,25 +52,30 @@ export class RegistrationEditComponent implements OnInit {
 
   onCancel() {
     this.editMode = false;
-    this.rid = null;
     this.registrationForm.reset();
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {
-    let registrationName = '';
-    let registrationDescription = '';
+    let registrationFirstName = '';
+    let registrationLastName = '';
+    let registrationAge = '';
+    let registrationGender = '';
 
     if (this.editMode) {
       const registration = this.sportService.getRegistration(this.id, this.cid).then(registration => {
-      registrationName = registration.name;
-      registrationDescription = registration.description;
+      registrationFirstName = registration.firstname;
+      registrationLastName = registration.lastname;
+      registrationAge = registration.age;
+      registrationGender = registration.gender;
     });
     }
 
     this.registrationForm = new FormGroup({
-      'name': new FormControl(registrationName, Validators.required),
-      'description': new FormControl(registrationDescription, Validators.required)
+      'firstname': new FormControl(registrationFirstName, Validators.required),
+      'lastname': new FormControl(registrationLastName, Validators.required),
+      'age': new FormControl(registrationAge, Validators.required),
+      'gender': new FormControl(registrationGender, Validators.required)
     });
   }
 }

@@ -7,6 +7,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SportEditComponent } from './sport/sport-edit/sport-edit.component';
 import { ClubEditComponent } from './club/club-edit/club-edit.component';
 import { RegistrationEditComponent } from './registration/registration-edit/registration-edit.component';
+import { ClubListComponent } from './club-list/club-list.component';
+import { RegistrationListComponent } from './registration-list/registration-list.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/sport', pathMatch: 'full' },
@@ -22,6 +24,8 @@ const appRoutes: Routes = [
     { path: 'new', component: RegistrationEditComponent },
     { path: ':rid/edit', component: RegistrationEditComponent },
   ] },
+  { path: 'clubs', component: ClubListComponent },
+  { path: 'registrations', component: RegistrationListComponent }
 ];
 
 @NgModule({
