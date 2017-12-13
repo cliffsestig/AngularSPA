@@ -38,7 +38,7 @@ export class ClubEditComponent implements OnInit {
   onSubmit() {
     if (this.editMode) {
       console.log('test');
-      this.clubForm.value._id = this.id;
+      this.clubForm.value._id = this.cid;
       this.onUpdate.next(this.clubForm.value);
       this.sportService.updateClub(this.id, this.cid, this.clubForm.value);
     } else {
@@ -52,7 +52,7 @@ export class ClubEditComponent implements OnInit {
     this.editMode = false;
     this.id = null;
     this.clubForm.reset();
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['./'], {relativeTo: this.route});
   }
 
   private initForm() {

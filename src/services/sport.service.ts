@@ -16,8 +16,16 @@ export class SportService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private serverUrl = environment.serverUrl + '/sport'; // URL to web api
   private sports: Sport[] = [];
+  private sport: Sport;
+  private club: Club;
   private sportsChanged = new BehaviorSubject<Sport[]>(this.sports);
   sportsChanges = this.sportsChanged.asObservable();
+
+  private clubsChanged = new BehaviorSubject<Sport>(this.sport);
+  clubsChanges = this.clubsChanged.asObservable();
+
+  private registrationsChanged = new BehaviorSubject<Club>(this.club);
+  registrationChanges = this.registrationsChanged.asObservable();
 
 
   constructor(private http: Http) {}
@@ -37,6 +45,15 @@ export class SportService {
 
 	changeSport(sport) {
 		this.sportsChanged.next(sport);
+	}
+
+
+	changeClub(sport) {
+		this.clubsChanged.next(sport);
+	}
+
+	changeRegistration(club) {
+		this.registrationsChanged.next(club);
 	}
 
   public getSport(id: number) {

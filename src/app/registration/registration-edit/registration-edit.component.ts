@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { SportService } from '../../../services/sport.service';
+
+import { Club } from '../../../shared/club.model';
 
 @Component({
   selector: 'app-registration-edit',
@@ -14,10 +16,10 @@ import { SportService } from '../../../services/sport.service';
 })
 export class RegistrationEditComponent implements OnInit {
 
-  id: number;
-  cid: number;
-  rid: number;
-  editMode = false;
+  @Input() id: number;
+  @Input() cid: number;
+  @Input() rid: number;
+  @Input() editMode = false;
   registrationForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
@@ -26,38 +28,33 @@ export class RegistrationEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.parent.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
-          this.cid = params['cid'];
-        }
-      );
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.rid = params['rid'];
-          this.editMode = params['rid'] != null;
-          this.initForm();
-        }
-      );
+    this.initForm();
   }
 
-  onSubmit() {
-    if (this.editMode) {
-    	console.log(this.id, this.cid, this.rid);
-      
-      this.sportService.updateRegistration(this.id, this.cid, this.rid, this.registrationForm.value);
-      this.onCancel();
-    } else {
-      this.sportService.addRegistration(this.registrationForm.value, this.id, this.cid);
+  @Output()
+  onAdd: EventEmitter<Club> = new EventEmitter<Club>();
 
-    this.router.navigate(['../'], {relativeTo: this.route});
+  @Output()
+  onUpdate: EventEmitter<Club> = new EventEmitter<Club>();
+
+ onSubmit() {
+    if (this.editMode) {
+      console.log(this.id, this.cid, this.rid);
+      this.registrationForm.value._id = this.rid;
+      this.onUpdate.next(this.registrationForm.value);
+      this.sportService.updateRegistration(this.id, this.cid, this.rid, this.registrationForm.value);
+    } else {
+      this.onAdd.next(this.registrationForm.value);
+      this.sportService.addRegistration(this.registrationForm.value, this.id, this.cid);
     }
+    this.onCancel();
   }
 
   onCancel() {
-    this.router.navigate(['../../'], {relativeTo: this.route});
+    this.editMode = false;
+    this.rid = null;
+    this.registrationForm.reset();
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {

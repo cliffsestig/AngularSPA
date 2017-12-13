@@ -14,7 +14,7 @@ import { SportService } from '../../services/sport.service';
 })
 export class ClubComponent implements OnInit, OnDestroy {
 
-	sport: Sport[];
+	sport: Sport;
 	id: number;
   cid: number;
   edit:boolean;
@@ -26,10 +26,10 @@ export class ClubComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
 	  ngOnInit() {
-		  this.subscription = this.sportService.sportsChanges
+		  this.subscription = this.sportService.clubsChanges
 	      .subscribe(
-	        (sports: Sport[]) => {
-	          this.sport = sports;
+	        (sport: Sport) => {
+	          this.sport = sport;
 	        }
 	      );
 	  	this.route.params
@@ -53,13 +53,13 @@ export class ClubComponent implements OnInit, OnDestroy {
   }
 
   onAddClub(sport){
-    //this.sport.clubs.push(sport);
+    this.sport.clubs.push(sport);
     this.sportService.changeSport(this.sport);
   }
 
   onUpdateClub(sport){
-      const index = this.sport.findIndex(x => x._id === sport._id);
-      this.sport[index] = sport;
+      const index = this.sport.clubs.findIndex(x => x._id === sport._id);
+      this.sport.clubs[index] = sport;
       this.sportService.changeSport(this.sport);
   }
 
@@ -69,9 +69,9 @@ export class ClubComponent implements OnInit, OnDestroy {
 
   onDeleteClub(id: number, cid: number, i) {
     
-    //this.sport.clubs.splice(i,1);
+    this.sport.clubs.splice(i,1);
     this.sportService.changeSport(this.sport);
     this.sportService.deleteClub(id, cid);
-    this.router.navigate(['/sport']);
+    this.router.navigate(['/sport/' + id]);
   }
 }

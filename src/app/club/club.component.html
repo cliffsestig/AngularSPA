@@ -3,7 +3,7 @@
     <app-club-edit (onAdd)="onAddClub($event)" (onUpdate)="onUpdateClub($event)" [editMode]='edit' [id]='id' [cid]='cid'></app-club-edit>
   </div>
 
-<!-- <div *ngFor="let club of sport.clubs; let i = index" class="col-md-7">
+<div *ngFor="let club of sport.clubs; let i = index" class="col-md-7">
 <a
   style="cursor: pointer;"
   [routerLink]="['club', club._id]"
@@ -17,4 +17,4 @@
   <button class="btn btn-success col-md-2" (click)="onEditClub(sport._id, sport.clubs[i]._id)"[routerLink]="[club._id, 'edit']">Edit</button>
 
   <button class="btn btn-danger  col-md-2" (click)="onDeleteClub(sport._id, sport.clubs[i]._id, i)">Delete</button>
-</div> -->
+</div>

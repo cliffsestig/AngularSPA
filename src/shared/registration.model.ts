@@ -1,4 +1,5 @@
 export class Registration {
+  public _id: number;
   public name: string;
   public description: string;
 

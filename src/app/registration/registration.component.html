@@ -1,10 +1,8 @@
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-success" (click)="onNewRegistration()">New Registration</button>
+
+  <div class="col-md-4 pull-right">
+    <app-registration-edit (onAdd)="onAddRegistration($event)" (onUpdate)="onUpdateRegistration($event)" [editMode]='edit' [id]='id' [cid]='cid' [rid]='rid'></app-registration-edit>
   </div>
-</div>
-<hr>
-<div class="col-md-5"*ngFor="let registration of club.registrations">
+<div class="col-md-5"*ngFor="let registration of club.registrations; let i = index">
 	<div class="col-md-10">
 	<a 
 	  class="list-group-item clearfix">
@@ -14,10 +12,7 @@
 	  </div>
 	</a>
 	</div>
-	<button class="btn btn-success pull-right col-md-1" [routerLink]="[registration._id, 'edit']">Edit</button>
+  <button class="btn btn-success col-md-2" (click)="onEditRegistration(club.registrations[i]._id)"[routerLink]="[club.registrations[i]._id, 'edit']">Edit</button>
 
-	<button class="btn btn-danger pull-right col-md-1" (click)="onDeleteRegistration(club._id, registration._id)">Delete</button>
+  <button class="btn btn-danger  col-md-2" (click)="onDeleteRegistration(club._id, club.registrations[i]._id, i)">Delete</button>
 </div>
-  <div class="col-md-7">
-    <router-outlet></router-outlet>
-  </div>
