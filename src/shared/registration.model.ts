@@ -4,13 +4,11 @@ export class Registration {
   public lastname: string;
   public age: number;
   public gender: string;
-  public description: string;
 
   constructor(firstname: string, lastname: string, age: number, gender: string, desc: string) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.age = age;
     this.gender = gender;
-    this.description = desc;
   }
 }

@@ -97,7 +97,7 @@ export class SportService {
 		  .toPromise()
 		  .then(response => {
 
-			return response.json() as Sport[];
+			return response.json() as Sport;
 		  })
 		  .catch(error => {
 			return this.handleError(error);
@@ -131,7 +131,7 @@ export class SportService {
 		return this.http.post(environment.serverUrl + "/sport/" + id, club, { headers: this.headers })
 		  .toPromise()
 		  .then(response => {
-			return response.json() as Club[];
+			return response.json() as Club;
 		  })
 		  .catch(error => {
 			return this.handleError(error);
@@ -160,10 +160,11 @@ export class SportService {
 	}
 
 	addRegistration(registration: Registration, id: number, cid: number) {
+		console.log(registration);
 		return this.http.post(environment.serverUrl + "/sport/" + id + "/club/" + cid, registration, { headers: this.headers })
 		  .toPromise()
 		  .then(response => {
-			return response.json() as Registration[];
+			return response.json() as Registration;
 		  })
 		  .catch(error => {
 			return this.handleError(error);

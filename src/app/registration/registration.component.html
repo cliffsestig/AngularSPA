@@ -1,9 +1,9 @@
 
-  <div class="col-md-4 pull-right">
+  <div class="col-md-4 pull-right col-xs-12">
     <app-registration-edit (onAdd)="onAddRegistration($event)" (onUpdate)="onUpdateRegistration($event)" [editMode]='edit' [id]='id' [cid]='cid' [rid]='rid'></app-registration-edit>
   </div>
-<div class="col-md-5"*ngFor="let registration of club.registrations; let i = index">
-	<div class="col-md-10">
+<div class="col-md-5 col-xs-12"*ngFor="let registration of club.registrations; let i = index">
+	<div class="col-md-10 col-xs-12">
 	<a 
 	  class="list-group-item clearfix">
 	  <div class="pull-left">
@@ -14,7 +14,7 @@
 	  </div>
 	</a>
 	</div>
-  <button class="btn btn-success col-md-2" (click)="onEditRegistration(club.registrations[i]._id)"[routerLink]="[club.registrations[i]._id, 'edit']">Edit</button>
+  <button class="btn btn-success col-md-2 col-xs-12" (click)="onEditRegistration(club.registrations[i]._id)"[routerLink]="[club.registrations[i]._id, 'edit']">Edit</button>
 
-  <button class="btn btn-danger  col-md-2" (click)="onDeleteRegistration(club._id, club.registrations[i]._id, i)">Delete</button>
+  <button class="btn btn-danger  col-md-2 col-xs-12" (click)="onDeleteRegistration(club._id, club.registrations[i]._id, i)">Delete</button>
 </div>

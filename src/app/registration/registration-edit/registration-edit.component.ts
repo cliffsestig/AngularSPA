@@ -44,8 +44,9 @@ export class RegistrationEditComponent implements OnInit {
       this.onUpdate.next(this.registrationForm.value);
       this.sportService.updateRegistration(this.id, this.cid, this.rid, this.registrationForm.value);
     } else {
-      this.onAdd.next(this.registrationForm.value);
-      this.sportService.addRegistration(this.registrationForm.value, this.id, this.cid);
+      this.sportService.addRegistration(this.registrationForm.value, this.id, this.cid).then(registration => {
+        this.onAdd.next(registration);
+      });
     }
     this.onCancel();
   }
@@ -53,7 +54,7 @@ export class RegistrationEditComponent implements OnInit {
   onCancel() {
     this.editMode = false;
     this.registrationForm.reset();
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../' + this.cid], {relativeTo: this.route});
   }
 
   private initForm() {

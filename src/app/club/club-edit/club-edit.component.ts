@@ -41,8 +41,10 @@ export class ClubEditComponent implements OnInit {
       this.onUpdate.next(this.clubForm.value);
       this.sportService.updateClub(this.id, this.cid, this.clubForm.value);
     } else {
-      this.onAdd.next(this.clubForm.value);
-      this.sportService.addClub(this.clubForm.value, this.id);
+
+      this.sportService.addClub(this.clubForm.value, this.id).then(club => {
+        this.onAdd.next(club);
+      });
     }
     this.onCancel();
   }

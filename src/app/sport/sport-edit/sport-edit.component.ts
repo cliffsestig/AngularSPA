@@ -40,9 +40,10 @@ export class SportEditComponent implements OnInit {
       this.onUpdate.next(this.sportForm.value);
       this.sportService.updateSport(this.id, this.sportForm.value);
     } else {
-      console.log(this.editMode);
-      this.onAdd.next(this.sportForm.value);
-      this.sportService.addSport(this.sportForm.value);
+     
+      this.sportService.addSport(this.sportForm.value).then(sport => {
+         this.onAdd.next(sport);
+      });
     }
     this.onCancel();
   }
